@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechZone Store</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         LOGIN PAGE
+    ========================== -->
+
+    <div id="authPage" class="auth-page">
+
+        <div class="auth-brand">
+            <div class="logo">TZ</div>
+
+            <div>
+                <h1>TechZone Store</h1>
+                <p>Technology at your fingertips</p>
+            </div>
+        </div>
+
+
+        <div class="auth-card">
+
+            <div class="tabs">
+
+                <button
+                    class="tab active"
+                    id="adminTab"
+                    onclick="showAuth('admin')">
+                    Admin
+                </button>
+
+                <button
+                    class="tab"
+                    id="customerTab"
+                    onclick="showAuth('customer')">
+                    Customer
+                </button>
+
+                <button
+                    class="tab"
+                    id="registerTab"
+                    onclick="showAuth('register')">
+                    Create Account
+                </button>
+
+            </div>
+
+
+            <!-- ADMIN LOGIN -->
+
+            <form id="adminForm">
+
+                <h2>Admin Login</h2>
+
+                <label>Admin Gmail</label>
+
+                <input
+                    type="email"
+                    id="adminEmail"
+                    value="reyesjoesen6@gmail.com"
+                    required>
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    required>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- CUSTOMER LOGIN -->
+
+            <form id="customerForm" class="hidden">
+
+                <h2>Customer Login</h2>
+
+                <label>Gmail</label>
+
+                <input
+                    type="email"
+                    id="customerEmail"
+                    placeholder="Enter your Gmail"
+                    required>
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="customerPassword"
+                    required>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- CREATE ACCOUNT -->
+
+            <form id="registerForm" class="hidden">
+
+                <h2>Create Account</h2>
+
+                <label>Full Name</label>
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Full Name"
+                    required>
+
+                <label>Gmail</label>
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="example@gmail.com"
+                    required>
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    minlength="8"
+                    required>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- VERIFICATION -->
+
+            <form id="verificationForm" class="hidden">
+
+                <h2>Gmail Verification</h2>
+
+                <p>
+                    A verification code was sent to:
+                </p>
+
+                <strong id="verificationEmail"></strong>
+
+                <input
+                    type="text"
+                    id="verificationCode"
+                    maxlength="6"
+                    placeholder="6-digit code"
+                    required>
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+                    Verify
+                </button>
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    onclick="backToLogin()">
+                    Back
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         STORE PAGE
+    ========================== -->
+
+    <div id="storePage" class="hidden">
+
+        <header class="topbar">
+
+            <div class="store-brand">
+
+                <div class="logo small-logo">
+                    TZ
+                </div>
+
+                <div>
+                    <strong>TechZone Store</strong>
+                    <span id="accountRole"></span>
+                </div>
+
+            </div>
+
+
+            <div class="user-info">
+
+                <span id="loggedUser"></span>
+
+                <button
+                    class="logout-btn"
+                    onclick="logout()">
+                    Logout
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="container">
+
+            <section class="hero">
+
+                <div>
+
+                    <span class="eyebrow">
+                        WELCOME TO
+                    </span>
+
+                    <h1>
+                        TechZone Store
+                    </h1>
+
+                    <p>
+                        Quality technology products
+                        for everyone.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- SEARCH -->
+
+            <section class="search-area">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search product...">
+
+                <select id="categoryFilter">
+
+                    <option value="">
+                        All Categories
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- ADMIN PANEL -->
+
+            <section
+                id="adminPanel"
+                class="admin-panel hidden">
+
+                <div class="admin-header">
+
+                    <div>
+
+                        <h2>
+                            Admin Management
+                        </h2>
+
+                        <p>
+                            Add, edit, and delete products
+                            and categories.
+                        </p>
+
+                    </div>
+
+                    <span class="protected">
+                        Protected by Passcode
+                    </span>
+
+                </div>
+
+
+                <div class="admin-grid">
+
+
+                    <!-- PRODUCT FORM -->
+
+                    <div class="admin-card">
+
+                        <h3>
+                            Add / Edit Product
+                        </h3>
+
+                        <input
+                            type="hidden"
+                            id="productId">
+
+                        <label>Product Name</label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            placeholder="Product name">
+
+                        <label>Category</label>
+
+                        <select id="productCategory">
+                        </select>
+
+                        <label>Price</label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00">
+
+                        <label>Quantity</label>
+
+                        <input
+                            type="number"
+                            id="productQuantity"
+                            min="0"
+                            placeholder="0">
+
+                        <label>Image URL</label>
+
+                        <input
+                            type="url"
+                            id="productImage"
+                            placeholder="https://...">
+
+                        <label>Description</label>
+
+                        <textarea
+                            id="productDescription"
+                            placeholder="Product description">
+                        </textarea>
+
+
+                        <div class="button-row">
+
+                            <button
+                                class="primary-btn"
+                                onclick="saveProduct()">
+                                Save Product
+                            </button>
+
+                            <button
+                                class="secondary-btn"
+                                onclick="clearProductForm()">
+                                Clear
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CATEGORY -->
+
+                    <div class="admin-card">
+
+                        <h3>
+                            Categories
+                        </h3>
+
+                        <input
+                            type="text"
+                            id="newCategory"
+                            placeholder="Category name">
+
+                        <button
+                            class="primary-btn full"
+                            onclick="addCategory()">
+                            Add Category
+                        </button>
+
+                        <div
+                            id="categoryList"
+                            class="category-list">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- PRODUCTS -->
+
+            <section class="products-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Products
+                    </h2>
+
+                    <span id="productCount">
+                        0 products
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="productsGrid"
+                    class="products-grid">
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         PASSCODE MODAL
+    ========================== -->
+
+    <div
+        id="passcodeModal"
+        class="modal hidden">
+
+        <div class="modal-card">
+
+            <h2>
+                Admin Passcode
+            </h2>
+
+            <p>
+                Enter the passcode to continue.
+            </p>
+
+            <input
+                type="password"
+                id="adminPasscode"
+                placeholder="Enter passcode">
+
+            <div class="button-row">
+
+                <button
+                    class="primary-btn"
+                    onclick="confirmPasscode()">
+                    Confirm
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="closePasscode()">
+                    Cancel
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         TOAST
+    ========================== -->
+
+    <div id="toastContainer"></div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
